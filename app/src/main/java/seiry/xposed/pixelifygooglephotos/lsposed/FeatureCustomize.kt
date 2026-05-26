@@ -7,6 +7,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
+import kotlinx.coroutines.runBlocking
 import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_FEATURES_LIST
 
 /**
@@ -14,7 +15,7 @@ import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_FEATURES_L
  */
 class FeatureCustomize: AppCompatActivity(R.layout.feature_customize) {
 
-    private val pref by lazy { FilePref }
+    private val pref get() = Pref
 
     /**
      * Set of feature names enabled by the user, fetched from shared prefs.
@@ -32,6 +33,8 @@ class FeatureCustomize: AppCompatActivity(R.layout.feature_customize) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runBlocking { App.bindPrefs() }
 
         val checkboxHolder = findViewById<LinearLayout>(R.id.feature_checkbox_holder)
         val saveButton = findViewById<Button>(R.id.save_features)

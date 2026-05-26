@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -38,17 +39,15 @@ import java.net.URL
 class ActivityMain: AppCompatActivity(R.layout.activity_main) {
 
     /**
-     * Normally [MODE_WORLD_READABLE] causes a crash.
-     * But if "xposedsharedprefs" flag is present in AndroidManifest,
-     * then the file is accordingly taken care by lsposed framework.
-     *
-     * If an exception is thrown, means module is not enabled,
-     * hence Android throws a security exception.
+     * Preferences are loaded from LSPosed via [Pref.bind] before
+     * [onCreate] populates the UI (see [App.bindPrefs]). If [Pref] is not bound
+     * (LSPosed missing / module not enabled), all reads fall back to defaults
+     * and the rest of the UI surfaces "module not enabled" hints.
      */
-    private val pref by lazy { FilePref }
+    private val pref get() = Pref
 
     private fun showRebootSnack(){
-        if (pref == null) return // don't display snackbar if module not active.
+        if (!Pref.isBound) return // don't display snackbar if module not active.
         val rootView = findViewById<ScrollView>(R.id.root_view_for_snackbar)
         Snackbar.make(rootView, R.string.please_force_stop_google_photos, Snackbar.LENGTH_SHORT).show()
     }
@@ -92,15 +91,15 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /**
-         * Check if [pref] is not null. If it is, then module is not enabled.
-         */
-        if (pref == null){
+        // Bind LSPosed-backed prefs before reading. Short timeout — the
+        // service binder normally arrives during process startup.
+        runBlocking { App.bindPrefs() }
+
+        // No service bound = LSPosed missing or module disabled.
+        if (!Pref.isBound) {
             AlertDialog.Builder(this)
                 .setMessage(R.string.module_not_enabled)
-                .setPositiveButton(R.string.close) {_, _ ->
-                    finish()
-                }
+                .setPositiveButton(R.string.close) { _, _ -> finish() }
                 .setCancelable(false)
                 .show()
         }
@@ -146,7 +145,7 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
          * See [FeatureSpoofer.featuresNotToSpoof].
          */
         overrideROMFeatureLevels.apply {
-            isChecked = pref?.getBoolean(PREF_OVERRIDE_ROM_FEATURE_LEVELS, true) ?: false
+            isChecked = pref.getBoolean(PREF_OVERRIDE_ROM_FEATURE_LEVELS, true)
             setOnCheckedChangeListener { _, isChecked ->
                 pref.run {
                     putBoolean(PREF_OVERRIDE_ROM_FEATURE_LEVELS, isChecked)
@@ -159,7 +158,7 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
          * See [FeatureSpoofer].
          */
         switchEnforceGooglePhotos.apply {
-            isChecked = pref?.getBoolean(PREF_STRICTLY_CHECK_GOOGLE_PHOTOS, true) ?: false
+            isChecked = pref.getBoolean(PREF_STRICTLY_CHECK_GOOGLE_PHOTOS, true)
             setOnCheckedChangeListener { _, isChecked ->
                 pref.run {
                     putBoolean(PREF_STRICTLY_CHECK_GOOGLE_PHOTOS, isChecked)
@@ -177,7 +176,7 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
 
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             adapter = aa
-            val defaultSelection = pref?.getString(PREF_DEVICE_TO_SPOOF, DeviceProps.defaultDeviceName)
+            val defaultSelection = pref.getString(PREF_DEVICE_TO_SPOOF, DeviceProps.defaultDeviceName)
             /** Second argument is `false` to prevent calling [peekFeatureFlagsChanged] on initialization */
             setSelection(aa.getPosition(defaultSelection), false)
 

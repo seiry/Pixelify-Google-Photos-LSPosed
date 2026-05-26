@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import kotlinx.coroutines.runBlocking
 import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_DEVICE_TO_SPOOF
 import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_ENABLE_VERBOSE_LOGS
 import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
@@ -12,7 +13,7 @@ import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_ANDROID_VE
 
 class AdvancedOptionsActivity: AppCompatActivity(R.layout.advanced_options_activity) {
 
-    private val pref by lazy { FilePref }
+    private val pref get() = Pref
 
     private val verboseLogging by lazy { findViewById<CheckBox>(R.id.verbose_logging) }
     private val deviceNameLabel by lazy { findViewById<TextView>(R.id.device_name_label) }
@@ -23,6 +24,8 @@ class AdvancedOptionsActivity: AppCompatActivity(R.layout.advanced_options_activ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        runBlocking { App.bindPrefs() }
 
         verboseLogging.isChecked = pref.getBoolean(PREF_ENABLE_VERBOSE_LOGS, false)
 
@@ -51,7 +54,7 @@ class AdvancedOptionsActivity: AppCompatActivity(R.layout.advanced_options_activ
 
             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             adapter = aa
-            val defaultSelection = pref?.getString(PREF_SPOOF_ANDROID_VERSION_MANUAL, null)
+            val defaultSelection = pref.getString(PREF_SPOOF_ANDROID_VERSION_MANUAL, null)
             setSelection(aa.getPosition(defaultSelection))
         }
 

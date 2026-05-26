@@ -30,7 +30,7 @@ class ModuleMain : XposedModule() {
             "android.app.ApplicationPackageManager"
     }
 
-    private val pref by lazy { FilePref }
+    private val pref get() = Pref
 
     private val verboseLog: Boolean by lazy {
         pref.getBoolean(PREF_ENABLE_VERBOSE_LOGS, false)
@@ -94,6 +94,14 @@ class ModuleMain : XposedModule() {
 
     override fun onModuleLoaded(param: ModuleLoadedParam) {
         info("onModuleLoaded: ${param.processName}")
+        // The hooked process gets read-only remote prefs from the framework.
+        // Failure mode: the framework lacks PROP_CAP_REMOTE — log and run on
+        // defaults; the module still works, just won't pick up UI changes.
+        try {
+            Pref.bind(getRemotePreferences(Pref.GROUP))
+        } catch (t: Throwable) {
+            warn("Remote preferences unavailable, using defaults", t)
+        }
     }
 
     override fun onPackageReady(param: PackageReadyParam) {

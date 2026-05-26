@@ -31,6 +31,24 @@ class App : Application() {
 
         /** Suspends until LSPosed binds the service. */
         suspend fun awaitService(): XposedService = serviceDeferred.await()
+
+        /**
+         * Wait for the LSPosed service and attach the remote prefs into [Pref].
+         * Returns true on success, false on timeout (LSPosed not installed or
+         * module not enabled). Activities should call this from `onCreate`
+         * before reading prefs — it short-circuits once Pref is already bound.
+         */
+        suspend fun bindPrefs(timeoutMs: Long = 3_000): Boolean {
+            if (Pref.isBound) return true
+            return try {
+                kotlinx.coroutines.withTimeout(timeoutMs) {
+                    Pref.bind(awaitService().getRemotePreferences(Pref.GROUP))
+                }
+                true
+            } catch (_: Throwable) {
+                false
+            }
+        }
     }
 
     override fun onCreate() {
