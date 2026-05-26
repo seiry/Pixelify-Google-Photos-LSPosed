@@ -1,0 +1,81 @@
+<resources>
+
+    <string name="app_name">Pixelify GPhotos</string>
+    <string name="xposed_description">在任何设备的 Google 相册里启用 Google Pixel 独占功能。</string>
+
+    <!--activity_main.xml-->
+    <string name="reset">重置</string>
+    <string name="device_to_spoof">伪装的设备</string>
+    <string name="spoofs_build_and_features">伪装 build.prop 与系统特性标记。</string>
+    <string name="customize_feature_flags">自定义特性标记。</string>
+    <string name="feature_flags_changed">特性标记已更新！</string>
+    <string name="spoof_only_in_google_photos">仅对 Google 相册生效。</string>
+    <string name="spoof_only_in_google_photos_desc">LSPosed 默认只对 Google 相册启用本模块。
+    如果你想在其他 app 里也使用本模块，请将此开关保持 <b>关闭</b>。</string>
+    <string name="override_rom_feature_levels">覆盖 ROM 自带的特性级别。</string>
+    <string name="override_rom_feature_levels_desc">当你选择了较低的 Pixel 特性级别时，
+    对 ROM 已包含的更高级别特性返回 false。<b>(推荐启用)</b></string>
+    <string name="force_stop_google_photos">强制停止\nGoogle 相册</string>
+    <string name="module_not_enabled">
+        \n
+        本模块似乎未启用。\n
+        请在 LSPosed 里启用它，然后重启设备。\n
+        如果已经启用，请重启一次设备；仍不生效请尝试卸载重装。
+    </string>
+    <string name="close">关闭</string>
+    <string name="open_google_photos">打开 Google 相册</string>
+    <string name="telegram_group">Telegram 群组！</string>
+    <string name="update_available">有新版本可用！</string>
+
+    <!--changelog—update version_head/version_desc whenever the in-app dialog should show new notes-->
+    <string name="version_head">版本 8.0.2</string>
+    <string name="version_desc">
+        \n
+        # 迁移到现代 libxposed/api 101（仅 LSPosed 支持）。\n
+        # 不再支持 EdXposed。\n
+        # 最低 Android 版本提高到 8.0。\n
+        # 包名改为 seiry.xposed.pixelifygooglephotos.lsposed，可与上游 APK 共存。\n
+    </string>
+
+    <!--menu_activity_main.xml-->
+    <string name="changelog">更新日志</string>
+
+    <!--ActivityMain.xml-->
+    <string name="please_force_stop_google_photos">请强制停止 Google 相册以使更改生效。</string>
+    <string name="export_config">导出配置</string>
+    <string name="export_config_desc">将本模块的设置保存为文件或分享给他人。\n
+        点击 \"保存\" 将弹出位置选择，把设置导出为 JSON 文件。
+    </string>
+    <string name="export_complete">导出完成！</string>
+    <string name="share">分享</string>
+    <string name="select_a_location">选择保存位置。</string>
+    <string name="share_config_file">分享配置文件</string>
+    <string name="import_config">导入配置</string>
+    <string name="import_config_desc">点击后将打开系统文件选择器，请选择要导入的配置文件。</string>
+    <string name="share_error">分享错误！</string>
+    <string name="read_error">读取错误！请确认选择的是正确的文件。</string>
+    <string name="import_complete">导入完成！</string>
+    <string name="advanced_options">高级选项</string>
+
+    <!--feature_customize.xml-->
+    <string name="save">保存</string>
+
+    <!--advanced_options_activity.xml-->
+    <string name="enable_verbose_logging">启用详细日志</string>
+    <string name="enable_verbose_logging_desc">在 LSPosed 日志和 Android logcat 中输出更详细的调试信息。\n
+        如需分享日志，请打开 LSPosed → 日志 → 顶部的保存图标，然后分享生成的日志文件。
+    </string>
+    <string name="spoof_android_version">伪装 Android 版本。</string>
+    <string name="spoof_android_version_desc">不要把伪装版本设置成高于当前设备的 Android 版本。\n
+        例如当前是 <b>Pie</b>，可以设置成 <b>Nougat / Oreo / Pie</b>，但不能设置成 Q / R / S。
+    </string>
+    <string name="this_might_cause_crash">这可能导致 Google 相册立即崩溃！</string>
+    <string name="dont_spoof_android_version">不伪装 Android 版本 <b>(推荐)</b></string>
+    <string name="follow_spoof_device_version">跟随伪装设备的 Android 版本。</string>
+    <string name="manually_set_android_version">手动设置 Android 版本。</string>
+
+    <!--Utils.kt-->
+    <string name="killing_please_wait">正在强制停止…请稍候。</string>
+    <string name="failed_to_stop_package">强制停止失败，请手动停止。</string>
+    <string name="failed_to_launch_package">启动失败，请手动启动。</string>
+</resources>

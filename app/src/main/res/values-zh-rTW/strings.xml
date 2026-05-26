@@ -11,6 +11,7 @@
     -->
 
     <string name="app_name">Pixelify Google Photos</string>
+    <string name="xposed_description">在任何裝置的 Google 相簿中啟用 Google Pixel 獨佔功能。</string>
 
     <!--activity_main.xml-->
     <string name="reset">還原</string>
@@ -28,14 +29,24 @@
     <string name="module_not_enabled">
         \n
         此模組似乎未啟用。\n
-        請在 LSPosed / EdXposed 中啟用它，然後重新啟動。\n
-        如果已啟用，可能需強制強制停止 Pixelify Google Photos 後重啟。\n
-        如果沒用，請移除並重新安裝。
+        請在 LSPosed 中啟用，然後重新啟動裝置。\n
+        如果已啟用，請強制停止 Pixelify Google Photos 後重啟。\n
+        如果仍無效，請移除後重新安裝。
     </string>
     <string name="close">關閉</string>
     <string name="open_google_photos">開啟 Google 相簿</string>
     <string name="telegram_group">Telegram 討論組！</string>
     <string name="update_available">有最新的更新可用！</string>
+
+    <!--changelog—update version_head/version_desc whenever the in-app dialog should show new notes-->
+    <string name="version_head">版本 8.0.2</string>
+    <string name="version_desc">
+        \n
+        # 已遷移到現代 libxposed/api 101（僅支援 LSPosed）。\n
+        # 不再支援 EdXposed。\n
+        # 最低 Android 版本提升到 8.0。\n
+        # 套件名稱改為 seiry.xposed.pixelifygooglephotos.lsposed，可與上游 APK 共存。\n
+    </string>
 
     <!--menu_activity_main.xml-->
     <string name="changelog">更改日誌</string>
@@ -62,8 +73,8 @@
 
     <!--advanced_options_activity.xml-->
     <string name="enable_verbose_logging">開啟詳細日誌記錄</string>
-    <string name="enable_verbose_logging_desc">LSPosed / EdXposed 日誌和 Android logcat 中的的除錯資訊。\n
-        如果要匯出日誌，請開啟 LSPosed / EdXposed -> 日誌 -> 頂部儲存圖示。然後分享儲存後的檔案或壓縮檔。
+    <string name="enable_verbose_logging_desc">在 LSPosed 日誌和 Android logcat 中輸出更詳細的除錯資訊。\n
+        如需分享日誌，請開啟 LSPosed → 日誌 → 頂部的儲存圖示，然後分享產生的檔案。
     </string>
     <string name="spoof_android_version">模擬 Android 版本</string>
     <string name="spoof_android_version_desc">不要設定高於您當前版本 Android 的版本。\n
