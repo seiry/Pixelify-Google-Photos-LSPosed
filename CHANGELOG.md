@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## [8.0.2](https://github.com/seiry/Pixelify-Google-Photos/compare/v8.0.1...v8.0.2) (2026-05-26)
+
+### Documentation
+
+* add commit message instructions for Conventional Commits ([423beeb](https://github.com/seiry/Pixelify-Google-Photos/commit/423beeb429e66f88d068e50f613d2b8bfd30087c))
+
+### CI
+
+* **release:** pin changelog URLs to github.com/seiry/Pixelify-Google-Photos ([112426b](https://github.com/seiry/Pixelify-Google-Photos/commit/112426babbfa1888f701f8a6df8f51457e1fc879))
+
 ## 8.0.1 (2026-05-26)
 
 ## 8.0.0 — Initial fork release

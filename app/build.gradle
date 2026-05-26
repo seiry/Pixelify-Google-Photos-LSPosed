@@ -12,8 +12,8 @@ android {
         applicationId "seiry.xposed.pixelifygooglephotos.lsposed"
         minSdk 26
         targetSdk 35
-        versionCode 9
-        versionName "8.0.1"
+        versionCode 10
+        versionName "8.0.2"
     }
 
     buildTypes {
