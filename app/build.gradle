@@ -1,33 +1,29 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
 }
 
 android {
-    namespace 'seiry.xposed.pixelifygooglephotos.lsposed'
-    compileSdk 36
-    buildToolsVersion '36.1.0'
+    namespace = 'seiry.xposed.pixelifygooglephotos.lsposed'
+    compileSdk = 36
+    buildToolsVersion = '36.1.0'
 
     defaultConfig {
-        applicationId "seiry.xposed.pixelifygooglephotos.lsposed"
-        minSdk 26
-        targetSdk 35
-        versionCode 10
-        versionName "8.0.2"
+        applicationId = "seiry.xposed.pixelifygooglephotos.lsposed"
+        minSdk = 26
+        targetSdk = 35
+        versionCode = 10
+        versionName = "8.0.2"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = '17'
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -41,15 +37,22 @@ android {
     }
 }
 
-dependencies {
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21
+    }
+}
 
+dependencies {
     implementation 'androidx.core:core-ktx:1.13.1'
     implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
     implementation 'com.google.android.material:material:1.12.0'
 
-    // New libxposed/api (LSPosed modern Xposed API)
+    // libxposed/api (modern LSPosed API)
     compileOnly 'io.github.libxposed:api:101.0.0'
 }
+
 tasks.register('printVersionInfo') {
     doLast {
         println "VERSION_NAME=${android.defaultConfig.versionName}"

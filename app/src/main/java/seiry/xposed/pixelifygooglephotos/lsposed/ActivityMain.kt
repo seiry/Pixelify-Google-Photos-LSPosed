@@ -4,12 +4,15 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Paint
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -246,22 +249,12 @@ class ActivityMain: AppCompatActivity(R.layout.activity_main) {
             }
         }
 
-        /**
-         * Check for updates in background thread.
-         * Yes AsyncTask is deprecated, but it works fine and for such a short network operation
-         * it is useless to try coroutine or something like that.
-         */
-        AsyncTask.execute {
-            isUpdateAvailable()?.let { url ->
-                runOnUiThread {
-                    updateAvailableLink.apply {
-                        paintFlags = Paint.UNDERLINE_TEXT_FLAG
-                        visibility = View.VISIBLE
-                        setOnClickListener {
-                            openWebLink(url)
-                        }
-                    }
-                }
+        lifecycleScope.launch {
+            val url = withContext(Dispatchers.IO) { isUpdateAvailable() } ?: return@launch
+            updateAvailableLink.apply {
+                paintFlags = Paint.UNDERLINE_TEXT_FLAG
+                visibility = View.VISIBLE
+                setOnClickListener { openWebLink(url) }
             }
         }
     }
