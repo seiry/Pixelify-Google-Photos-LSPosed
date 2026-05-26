@@ -2,7 +2,7 @@
 
 [![Build and Release](https://github.com/seiry/Pixelify-Google-Photos/actions/workflows/release.yaml/badge.svg)](https://github.com/seiry/Pixelify-Google-Photos/actions/workflows/release.yaml)
 
-🇬🇧 **English**: [README.md](README.md)
+**English**: [README.md](README.md)
 
 本项目 fork 自 [BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos)，已经从老的 `de.robv.android.xposed` API 迁移到现代的 [libxposed/api](https://github.com/libxposed/api)（LSPosed API 101）。
 
@@ -20,18 +20,21 @@
 ## 环境要求
 
 - Android **8.0 或更高**（libxposed/api 101 要求 minSdk 26，上游 fork 之前支持到 5.0）
-- **[LSPosed](https://github.com/LSPosed/LSPosed) 2.0 或更高** —— 更早的 LSPosed 只提供老 API，加载不了这个模块。EdXposed 同样不再支持（libxposed/api 101 只在 LSPosed 上跑）
+- **LSPosed 2.0 或更高** —— 更早的 LSPosed 只提供老 API，加载不了这个模块。EdXposed 同样不再支持（libxposed/api 101 只在 LSPosed 上跑）
 - Magisk / KernelSU（或其他能承载 LSPosed 的 Zygisk 宿主）
 
-LSPosed 相关链接：
+> **关于 LSPosed 分支的提醒。** 原版 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已于 2024-01 **被官方 archived**，最后一个 commit `df74d83`，作者不再维护。现在还在持续更新的是 **[JingMatrix/Vector](https://github.com/JingMatrix/Vector)**（之前叫 `JingMatrix/LSPosed`），它就是发布 LSPosed 2.0+ / libxposed/api 101 支持的那一套，请从这里下载安装。
 
-- [LSPosed Telegram 群](https://t.me/LSPosed)
+相关链接：
+
+- [JingMatrix/Vector](https://github.com/JingMatrix/Vector) —— 当前活跃维护的 LSPosed 框架
+- [LSPosed Telegram 群](https://t.me/LSPosed) —— 答疑 / 讨论
 - [libxposed/api Javadoc](https://libxposed.github.io/api/) —— 被 hook 进程里 `ModuleMain` 用的那套 API
 - [libxposed/service Javadoc](https://libxposed.github.io/service/) —— UI app 端用来访问 remote preferences、scope 查询等的 API
 
 ## 安装步骤
 
-1. 装 Magisk + [LSPosed (Zygisk) 2.0 或更新版](https://github.com/LSPosed/LSPosed)
+1. 装 Magisk + LSPosed 2.0 或更新版 —— 从活跃维护的 [JingMatrix/Vector](https://github.com/JingMatrix/Vector) 获取（原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已 archived）
 2. 从 [Releases](https://github.com/seiry/Pixelify-Google-Photos/releases) 页面下载 APK 并安装
 3. 打开 LSPosed，启用本模块 —— 作用域已通过 `META-INF/xposed/module.prop` 的 `staticScope=true` 和 `META-INF/xposed/scope.list` 自动锁定为 `com.google.android.apps.photos`
 4. 强制停止或重启 Google Photos（启动器 app 里有按钮）。首次使用可能需要清除 Google Photos 数据
@@ -70,4 +73,5 @@ export ANDROID_HOME=/path/to/Android/sdk
 ## 致谢
 
 - 上游：[BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos)
-- 现代 Xposed API：[libxposed/api](https://github.com/libxposed/api)、[libxposed/service](https://github.com/libxposed/service)、[LSPosed](https://github.com/LSPosed/LSPosed)
+- 现代 Xposed API：[libxposed/api](https://github.com/libxposed/api)、[libxposed/service](https://github.com/libxposed/service)
+- LSPosed 框架：[JingMatrix/Vector](https://github.com/JingMatrix/Vector)（活跃 fork；原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 已 archived）
