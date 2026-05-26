@@ -38,12 +38,14 @@
     <string name="telegram_group">Telegram group!</string>
     <string name="update_available">App update available!</string>
 
-    <!--changelog-->
-    <string name="version_head">Version 4.1</string>
+    <!--changelog—update both strings (and bump versionCode) every release if you want the dialog to pop again-->
+    <string name="version_head">Version 8.0</string>
     <string name="version_desc">
         \n
-        # In light of recent event of Vanced project getting shut down because of using Youtube logo,
-        this app\'s logo has been updated to avoid any legal conflict.\n
+        # Migrated to the modern libxposed/api 101 (LSPosed only).\n
+        # EdXposed is no longer supported.\n
+        # Minimum Android version raised to 8.0.\n
+        # Package renamed to seiry.xposed.pixelifygooglephotos.lsposed so this fork can coexist with the upstream APK.\n
     </string>
 
     <!--menu_activity_main.xml-->
