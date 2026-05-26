@@ -29,14 +29,15 @@ const repoRoot = path.resolve(__dirname, '..');
 const gradlePath = path.join(repoRoot, 'app/build.gradle');
 let gradle = fs.readFileSync(gradlePath, 'utf-8');
 
-const codeMatch = gradle.match(/versionCode (\d+)/);
+// Match both AGP 8-style "versionCode 10" and AGP 9-style "versionCode = 10".
+const codeMatch = gradle.match(/versionCode\s*=?\s*(\d+)/);
 if (!codeMatch) {
   throw new Error('Could not find `versionCode <int>` in app/build.gradle');
 }
 const newCode = parseInt(codeMatch[1], 10) + 1;
 
-gradle = gradle.replace(/versionCode \d+/, `versionCode ${newCode}`);
-gradle = gradle.replace(/versionName "[^"]+"/, `versionName "${versionName}"`);
+gradle = gradle.replace(/versionCode(\s*=?\s*)\d+/, `versionCode$1${newCode}`);
+gradle = gradle.replace(/versionName(\s*=?\s*)"[^"]+"/, `versionName$1"${versionName}"`);
 fs.writeFileSync(gradlePath, gradle);
 console.log(`  ✓ app/build.gradle   versionCode=${newCode}, versionName="${versionName}"`);
 
