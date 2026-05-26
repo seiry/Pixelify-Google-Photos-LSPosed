@@ -1,0 +1,12 @@
+{
+  // Tell GitHub Copilot to follow our Conventional Commits rules when
+  // generating commit messages from staged diffs (sparkle icon in Source Control).
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    { "file": ".github/commit-message-instructions.md" }
+  ],
+
+  // Same instructions for PR title/description generation.
+  "github.copilot.chat.pullRequestDescriptionGeneration.instructions": [
+    { "file": ".github/commit-message-instructions.md" }
+  ]
+}
