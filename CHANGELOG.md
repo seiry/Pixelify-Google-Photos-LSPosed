@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## 8.0.1 (2026-05-26)
+
 ## 8.0.0 — Initial fork release
 
 * Migrated from `de.robv.android.xposed:api:82` to `io.github.libxposed:api:101.0.0` (modern LSPosed API)
