@@ -3,7 +3,7 @@ name: Build and Release
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    tags: [ 'v*' ]
 
 permissions:
   contents: write
@@ -41,28 +41,36 @@ jobs:
       env:
         BUILD_TOOLS_VERSION: "36.1.0"
 
-    - name: Retrieve version
+    - name: Resolve release metadata
       run: |
-        VERSION=$(echo ${{ github.event.head_commit.id }} | head -c 7)
-        VERSION=${VERSION:-latest}
         VERSION_NAME=$(grep -oP '(?<=VERSION_NAME=).+' version_info.txt)
-        echo "VERSION=$VERSION" >> $GITHUB_ENV
-        echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+        SHORT_SHA=$(echo "${{ github.sha }}" | head -c 7)
+        if [ "${{ github.ref_type }}" = "tag" ]; then
+          RELEASE_TAG="${{ github.ref_name }}"
+        else
+          RELEASE_TAG="manual-${VERSION_NAME}-${SHORT_SHA}"
+        fi
+        APK_NAME="Pixelify-Google-Photos-${RELEASE_TAG}.apk"
+        {
+          echo "VERSION_NAME=$VERSION_NAME"
+          echo "RELEASE_TAG=$RELEASE_TAG"
+          echo "APK_NAME=$APK_NAME"
+        } >> "$GITHUB_ENV"
 
     - name: Rename
-      run: mv ${{ github.workspace }}/app/build/outputs/apk/release/app-release-unsigned-signed.apk ${{ github.workspace }}/app/build/outputs/apk/release/Pixelify-Google-Photos-${{ env.VERSION_NAME }}-${{ env.VERSION }}.apk
+      run: mv "${{ github.workspace }}/app/build/outputs/apk/release/app-release-unsigned-signed.apk" "${{ github.workspace }}/app/build/outputs/apk/release/${{ env.APK_NAME }}"
 
     - name: Upload built apk
       uses: actions/upload-artifact@v4
       with:
-        name: Pixelify-Google-Photos-${{ env.VERSION_NAME }}-${{ env.VERSION }}
-        path: ${{ github.workspace }}/app/build/outputs/apk/release/Pixelify-Google-Photos-${{ env.VERSION_NAME }}-${{ env.VERSION }}.apk
+        name: ${{ env.APK_NAME }}
+        path: ${{ github.workspace }}/app/build/outputs/apk/release/${{ env.APK_NAME }}
 
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: Pixelify-GP-${{ env.VERSION_NAME }}-${{ env.VERSION }}
+        tag_name: ${{ env.RELEASE_TAG }}
         name: Pixelify Google Photos ${{ env.VERSION_NAME }}
         draft: false
         prerelease: false
-        files: ${{ github.workspace }}/app/build/outputs/apk/release/Pixelify-Google-Photos-${{ env.VERSION_NAME }}-${{ env.VERSION }}.apk
+        files: ${{ github.workspace }}/app/build/outputs/apk/release/${{ env.APK_NAME }}
