@@ -22,6 +22,10 @@
     "@release-it/conventional-changelog": {
       "preset": {
         "name": "conventionalcommits",
+        "commitUrlFormat": "https://github.com/seiry/Pixelify-Google-Photos/commit/{{hash}}",
+        "compareUrlFormat": "https://github.com/seiry/Pixelify-Google-Photos/compare/{{previousTag}}...{{currentTag}}",
+        "issueUrlFormat": "https://github.com/seiry/Pixelify-Google-Photos/issues/{{id}}",
+        "userUrlFormat": "https://github.com/{{user}}",
         "types": [
           { "type": "feat", "section": "Features" },
           { "type": "fix", "section": "Bug Fixes" },
