@@ -71,6 +71,10 @@ captures/
 *.jks
 *.keystore
 
+# Node deps (release tooling only — release-it, conventional-changelog)
+node_modules/
+.release-it.log
+
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 .cxx/

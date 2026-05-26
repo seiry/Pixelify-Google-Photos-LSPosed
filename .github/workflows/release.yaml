@@ -57,6 +57,21 @@ jobs:
           echo "APK_NAME=$APK_NAME"
         } >> "$GITHUB_ENV"
 
+    - name: Extract release notes from CHANGELOG.md
+      run: |
+        if [ -f CHANGELOG.md ]; then
+          # First section between two top-level headers (## ...), excluding the header line itself.
+          awk '/^## /{ if (++c > 1) exit; next } c==1' CHANGELOG.md > .release_notes.md
+          if [ ! -s .release_notes.md ]; then
+            echo "_Release notes not found in CHANGELOG.md; see commit history._" > .release_notes.md
+          fi
+        else
+          echo "_See commit history._" > .release_notes.md
+        fi
+        echo "---- release notes ----"
+        cat .release_notes.md
+        echo "-----------------------"
+
     - name: Rename
       run: mv "${{ github.workspace }}/app/build/outputs/apk/release/app-release-unsigned-signed.apk" "${{ github.workspace }}/app/build/outputs/apk/release/${{ env.APK_NAME }}"
 
@@ -71,6 +86,7 @@ jobs:
       with:
         tag_name: ${{ env.RELEASE_TAG }}
         name: Pixelify Google Photos ${{ env.VERSION_NAME }}
+        body_path: .release_notes.md
         draft: false
         prerelease: false
         files: ${{ github.workspace }}/app/build/outputs/apk/release/${{ env.APK_NAME }}

@@ -2,6 +2,48 @@
 
 Reference for cutting a new release. Optimized for an AI agent to follow without further context.
 
+## TL;DR — one-shot flow
+
+```bash
+pnpm install                                  # only once per clone
+pnpm release                                  # interactive: pick patch/minor/major
+# or non-interactive:
+pnpm release:patch    # 8.0.0 → 8.0.1
+pnpm release:minor    # 8.0.0 → 8.1.0
+pnpm release:major    # 8.0.0 → 9.0.0
+```
+
+`release-it` will:
+1. Decide the new version (interactive prompt or from the script name)
+2. Generate `CHANGELOG.md` from conventional commits since the last tag (via `@release-it/conventional-changelog`)
+3. Run `scripts/sync-android-version.mjs` to propagate the version into `app/build.gradle`, `update_info.json`, and `strings.xml`
+4. Commit everything (`chore: release vX.Y.Z`), tag (`vX.Y.Z`), push to `main` + push the tag
+5. The pushed `v*` tag triggers `.github/workflows/release.yaml`, which builds + signs the APK and creates a GitHub Release whose body is the latest section of `CHANGELOG.md`
+
+To preview without changing anything:
+
+```bash
+pnpm release:dry
+```
+
+## Conventional Commits — required for auto-changelog
+
+The auto-generated section in `CHANGELOG.md` is only as good as your commit messages. Use the [Conventional Commits](https://www.conventionalcommits.org/) prefix on every commit:
+
+| Prefix | Shows up in CHANGELOG.md under | Triggers version bump |
+|---|---|---|
+| `feat: ...` | **Features** | minor |
+| `fix: ...` | **Bug Fixes** | patch |
+| `perf: ...` | **Performance** | patch |
+| `refactor: ...` | Refactor | none |
+| `docs: ...` | Documentation | none |
+| `build: ...` | Build | none |
+| `ci: ...` | CI | none |
+| `chore: ...` / `test:` / `style:` | _hidden_ | none |
+| `feat!: ...` or footer `BREAKING CHANGE:` | **⚠ BREAKING CHANGES** | major |
+
+If you don't use these prefixes you'll still get a release, but the changelog section will be empty.
+
 ## Version sources of truth (must all agree)
 
 A release bumps **four** places. If they drift, the changelog dialog stops firing or the in-app update check breaks.

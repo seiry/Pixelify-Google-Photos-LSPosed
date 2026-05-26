@@ -1,0 +1,42 @@
+{
+  "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "requireCleanWorkingDir": true,
+    "requireBranch": "main",
+    "push": true,
+    "addUntrackedFiles": false
+  },
+  "github": {
+    "release": false
+  },
+  "npm": {
+    "publish": false
+  },
+  "hooks": {
+    "after:bump": "node scripts/sync-android-version.mjs ${version}",
+    "after:release": "printf '\\n\\033[1;32m✓\\033[0m Pushed tag v%s. CI will build and publish the APK at:\\n  https://github.com/seiry/Pixelify-Google-Photos/actions\\n' ${version}"
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": "Features" },
+          { "type": "fix", "section": "Bug Fixes" },
+          { "type": "perf", "section": "Performance" },
+          { "type": "refactor", "section": "Refactor" },
+          { "type": "docs", "section": "Documentation" },
+          { "type": "build", "section": "Build" },
+          { "type": "ci", "section": "CI" },
+          { "type": "chore", "hidden": true },
+          { "type": "test", "hidden": true },
+          { "type": "style", "hidden": true }
+        ]
+      },
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog\n\nAll notable changes to this project will be documented in this file.\n"
+    }
+  }
+}

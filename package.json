@@ -1,0 +1,18 @@
+{
+  "name": "pixelify-google-photos-release",
+  "version": "8.0.0",
+  "private": true,
+  "description": "Release tooling for the Android module — version sync + changelog. Not part of the APK.",
+  "scripts": {
+    "release": "release-it",
+    "release:dry": "release-it --dry-run",
+    "release:patch": "release-it patch",
+    "release:minor": "release-it minor",
+    "release:major": "release-it major"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^11.0.0",
+    "release-it": "^20.0.1"
+  },
+  "packageManager": "pnpm@10.0.0"
+}
