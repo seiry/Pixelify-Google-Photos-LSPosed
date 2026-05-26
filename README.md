@@ -8,11 +8,12 @@ The module makes any Android device look like a Google Pixel to the Google Photo
 
 ## What changed in this fork
 
-- Switched from `de.robv.android.xposed:api:82` to `io.github.libxposed:api:101.0.0`
+- Switched from `de.robv.android.xposed:api:82` to `io.github.libxposed:api:101.0.0` and `io.github.libxposed:service:101.0.0`
 - New entry point: a single `ModuleMain` extending `XposedModule`, declared via `META-INF/xposed/java_init.list` (the old `assets/xposed_init` and `xposed*` manifest meta-data have been removed)
 - Hooks now use the OkHttp-style interceptor chain (`hook(method).intercept { chain -> ... }`) instead of `XposedHelpers.findAndHookMethod` / `XC_MethodHook`
+- Settings moved off `/sdcard/pixelify-pref.json` + root onto LSPosed remote preferences — **the module no longer requires root on the hooked Google Photos process**
 - Package name changed to `seiry.xposed.pixelifygooglephotos.lsposed` so this fork installs side-by-side with the upstream APK
-- Toolchain: AGP 8.10.1 / Gradle 8.13 / Kotlin 2.0.21 / JDK 21, `compileSdk 36`, `minSdk 26`, `targetSdk 35`
+- Toolchain: AGP 9.2.1 / Gradle 9.5.1 / Kotlin 2.2.21 / JDK 21, `compileSdk 36`, `minSdk 26`, `targetSdk 35`
 
 ## Requirements
 
@@ -38,7 +39,9 @@ Sources for the feature lists and build props:
 
 ## Preferences
 
-Settings are persisted to `/sdcard/pixelify-pref.json` (root is requested on first read/write). This is the upstream's workaround for `XSharedPreferences` being broken on newer Android — kept in this fork so config from the original app carries over.
+Settings live in LSPosed's remote preferences (group `settings`), managed by the framework — no manual files, no root required. The UI app reads/writes via `XposedService.getRemotePreferences("settings")`; the hooked Google Photos process reads via `XposedModule.getRemotePreferences("settings")`.
+
+⚠ This is a breaking change from the upstream `/sdcard/pixelify-pref.json` scheme — settings from the original BaltiApps APK are **not** carried over.
 
 ## Building locally
 

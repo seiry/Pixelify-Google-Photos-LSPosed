@@ -53,7 +53,7 @@ A release bumps **four** places. If they drift, the changelog dialog stops firin
 | 1 | `app/build.gradle` | `versionCode` | `9` | Integer, must increase monotonically. Read by Android (`pm install -r`) and by `BuildConfig.VERSION_CODE`. |
 | 2 | `app/build.gradle` | `versionName` | `"8.1"` | Free-form string. Surfaced in Settings → Apps and in the CI release tag (when triggered manually). |
 | 3 | `update_info.json` | `latest_version_code` | `9` | Must equal #1. The app fetches this from `raw.githubusercontent.com/seiry/Pixelify-Google-Photos/main/update_info.json` on launch; if remote > local `BuildConfig.VERSION_CODE`, the "update available" link appears. |
-| 4 | `app/src/main/res/values/strings.xml` | `version_head` + `version_desc` | `"Version 8.1"` + bullet list | Powers the in-app changelog dialog. Dialog fires once per user when `BuildConfig.VERSION_CODE > PREF_LAST_VERSION` saved in `/sdcard/pixelify-pref.json`. |
+| 4 | `app/src/main/res/values/strings.xml` | `version_head` + `version_desc` | `"Version 8.1"` + bullet list | Powers the in-app changelog dialog. Dialog fires once per user when `BuildConfig.VERSION_CODE > PREF_LAST_VERSION` saved in LSPosed remote preferences. |
 
 ### Changelog dialog mechanics
 
