@@ -23,18 +23,19 @@
 - **LSPosed 2.0 或更高** —— 更早的 LSPosed 只提供老 API，加载不了这个模块。EdXposed 同样不再支持（libxposed/api 101 只在 LSPosed 上跑）
 - Magisk / KernelSU（或其他能承载 LSPosed 的 Zygisk 宿主）
 
-> **关于 LSPosed 分支的提醒。** 原版 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已于 2024-01 **被官方 archived**，最后一个 commit `df74d83`，作者不再维护。现在还在持续更新的是 **[JingMatrix/Vector](https://github.com/JingMatrix/Vector)**（之前叫 `JingMatrix/LSPosed`），它就是发布 LSPosed 2.0+ / libxposed/api 101 支持的那一套，请从这里下载安装。
+> **关于 LSPosed 的说明。** 原版 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已于 2024-01 **被 archived**，最后 commit `df74d83`，不再发版。当前的 LSPosed 2.0+ 都来自社区 fork —— 自己挑一个信得过的、活跃维护的版本安装。
+
+目前**只在 Android 16 + LSPosed 2** 上验证过。理论上 Android 8 及以上（minSdk 是 26）都应该能跑，但没实际测过。
 
 相关链接：
 
-- [JingMatrix/Vector](https://github.com/JingMatrix/Vector) —— 当前活跃维护的 LSPosed 框架
 - [LSPosed Telegram 群](https://t.me/LSPosed) —— 答疑 / 讨论
 - [libxposed/api Javadoc](https://libxposed.github.io/api/) —— 被 hook 进程里 `ModuleMain` 用的那套 API
 - [libxposed/service Javadoc](https://libxposed.github.io/service/) —— UI app 端用来访问 remote preferences、scope 查询等的 API
 
 ## 安装步骤
 
-1. 装 Magisk + LSPosed 2.0 或更新版 —— 从活跃维护的 [JingMatrix/Vector](https://github.com/JingMatrix/Vector) 获取（原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已 archived）
+1. 装 Magisk + LSPosed 2.0 或更新版（原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 已 archived，请从社区维护的 fork 获取构建产物）
 2. 从 [Releases](https://github.com/seiry/Pixelify-Google-Photos/releases) 页面下载 APK 并安装
 3. 打开 LSPosed，启用本模块 —— 作用域已通过 `META-INF/xposed/module.prop` 的 `staticScope=true` 和 `META-INF/xposed/scope.list` 自动锁定为 `com.google.android.apps.photos`
 4. 强制停止或重启 Google Photos（启动器 app 里有按钮）。首次使用可能需要清除 Google Photos 数据
@@ -74,4 +75,4 @@ export ANDROID_HOME=/path/to/Android/sdk
 
 - 上游：[BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos)
 - 现代 Xposed API：[libxposed/api](https://github.com/libxposed/api)、[libxposed/service](https://github.com/libxposed/service)
-- LSPosed 框架：[JingMatrix/Vector](https://github.com/JingMatrix/Vector)（活跃 fork；原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 已 archived）
+- LSPosed 框架：原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed)（已 archived，由社区 fork 接力）

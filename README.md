@@ -23,18 +23,19 @@ The module makes any Android device look like a Google Pixel to the Google Photo
 - **LSPosed 2.0+** — earlier LSPosed releases ship the legacy API only and won't load this module. EdXposed is no longer supported either (libxposed/api 101 is LSPosed-only).
 - Magisk / KernelSU (or any other Zygisk host that LSPosed can ride on).
 
-> **Heads up on LSPosed forks.** The original [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) repository is **archived** as of 2024-01 — last commit `df74d83`, no longer maintained. The actively maintained continuation lives at **[JingMatrix/Vector](https://github.com/JingMatrix/Vector)** (formerly `JingMatrix/LSPosed`), which is what ships LSPosed 2.0+ with libxposed/api 101 support. Install from there.
+> **Note on LSPosed.** The original [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) repository is **archived** as of 2024-01 (last commit `df74d83`) and no longer ships releases. Current LSPosed 2.0+ builds come from community forks — find a maintained one that you trust before installing.
+
+Tested only on **Android 16 + LSPosed 2** so far. Earlier Android versions ≥ 8 should work (minSdk is 26) but haven't been verified.
 
 Useful links:
 
-- [JingMatrix/Vector](https://github.com/JingMatrix/Vector) — the actively maintained LSPosed framework
 - [LSPosed Telegram group](https://t.me/LSPosed) — support / discussion
 - [libxposed/api Javadoc](https://libxposed.github.io/api/) — API used inside the hooked process (`ModuleMain`)
 - [libxposed/service Javadoc](https://libxposed.github.io/service/) — API used in the UI app for remote preferences, scope queries, etc.
 
 ## Install
 
-1. Install Magisk + LSPosed 2.0 or newer — get it from the actively maintained [JingMatrix/Vector](https://github.com/JingMatrix/Vector) (the original [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) repo is archived).
+1. Install Magisk + LSPosed 2.0 or newer (the original [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) repo is archived; use a maintained fork's build).
 2. Install the APK from the [Releases](https://github.com/seiry/Pixelify-Google-Photos/releases) page.
 3. Open LSPosed, enable the module — scope is automatically `com.google.android.apps.photos` because the module declares `staticScope=true` in `META-INF/xposed/module.prop` and lists Google Photos in `META-INF/xposed/scope.list`.
 4. Force-stop or restart Google Photos (the launcher app provides a button for this). You may also need to clear Google Photos data the first time.
@@ -74,4 +75,4 @@ The user takes sole responsibility for any damage that might arise from using th
 
 - Upstream: [BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos)
 - Modern Xposed API: [libxposed/api](https://github.com/libxposed/api), [libxposed/service](https://github.com/libxposed/service)
-- LSPosed framework: [JingMatrix/Vector](https://github.com/JingMatrix/Vector) (active fork; the original [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) is archived)
+- LSPosed framework: original [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) (archived; continued by community forks)
