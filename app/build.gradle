@@ -4,14 +4,16 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    namespace 'seiry.xposed.pixelifygooglephotos.lsposed'
+    compileSdk 36
+    buildToolsVersion '36.1.0'
 
     defaultConfig {
-        applicationId "balti.xposed.pixelifygooglephotos"
-        minSdk 21
-        targetSdk 33
-        versionCode 7
-        versionName "7.0"
+        applicationId "seiry.xposed.pixelifygooglephotos.lsposed"
+        minSdk 26
+        targetSdk 35
+        versionCode 8
+        versionName "8.0"
     }
 
     buildTypes {
@@ -21,22 +23,32 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    packaging {
+        resources {
+            merges += 'META-INF/xposed/*'
+        }
     }
 }
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
 
-    // Xposed API
-    compileOnly 'de.robv.android.xposed:api:82'
+    // New libxposed/api (LSPosed modern Xposed API)
+    compileOnly 'io.github.libxposed:api:101.0.0'
 }
 tasks.register('printVersionInfo') {
     doLast {

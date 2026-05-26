@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos;
+package seiry.xposed.pixelifygooglephotos.lsposed;
 
 import org.json.JSONArray
 import org.json.JSONObject

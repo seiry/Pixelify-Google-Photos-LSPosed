@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos
+package seiry.xposed.pixelifygooglephotos.lsposed
 
 /**
  * Build values taken from:

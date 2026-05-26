@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos
+package seiry.xposed.pixelifygooglephotos.lsposed
 
 import android.app.Activity
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_FEATURES_LIST
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_FEATURES_LIST
 
 /**
  * Provides granular controls for selecting some specific feature flags.

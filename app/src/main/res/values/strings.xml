@@ -12,6 +12,7 @@
     -->
 
     <string name="app_name">Pixelify GPhotos</string>
+    <string name="xposed_description">Add Google Pixel features in Google Photos on any device.</string>
 
     <!--activity_main.xml-->
     <string name="reset">Reset</string>

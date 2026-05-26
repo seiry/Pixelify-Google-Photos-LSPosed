@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos
+package seiry.xposed.pixelifygooglephotos.lsposed
 
 import android.app.Activity
 import android.content.Intent
@@ -14,18 +14,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import balti.xposed.pixelifygooglephotos.Constants.FIELD_LATEST_VERSION_CODE
-import balti.xposed.pixelifygooglephotos.Constants.PREF_DEVICE_TO_SPOOF
-import balti.xposed.pixelifygooglephotos.Constants.PREF_ENABLE_VERBOSE_LOGS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_LAST_VERSION
-import balti.xposed.pixelifygooglephotos.Constants.PREF_OVERRIDE_ROM_FEATURE_LEVELS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_FEATURES_LIST
-import balti.xposed.pixelifygooglephotos.Constants.PREF_STRICTLY_CHECK_GOOGLE_PHOTOS
-import balti.xposed.pixelifygooglephotos.Constants.RELEASES_URL
-import balti.xposed.pixelifygooglephotos.Constants.TELEGRAM_GROUP
-import balti.xposed.pixelifygooglephotos.Constants.UPDATE_INFO_URL
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.FIELD_LATEST_VERSION_CODE
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_DEVICE_TO_SPOOF
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_ENABLE_VERBOSE_LOGS
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_LAST_VERSION
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_OVERRIDE_ROM_FEATURE_LEVELS
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_FEATURES_LIST
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_STRICTLY_CHECK_GOOGLE_PHOTOS
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.RELEASES_URL
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.TELEGRAM_GROUP
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.UPDATE_INFO_URL
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream

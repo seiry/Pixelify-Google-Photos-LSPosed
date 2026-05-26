@@ -1,4 +1,4 @@
-package balti.xposed.pixelifygooglephotos
+package seiry.xposed.pixelifygooglephotos.lsposed
 
 import android.content.Context
 import android.content.Intent

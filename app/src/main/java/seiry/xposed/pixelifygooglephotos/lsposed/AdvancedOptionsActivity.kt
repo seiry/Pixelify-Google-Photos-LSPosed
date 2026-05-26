@@ -1,14 +1,14 @@
-package balti.xposed.pixelifygooglephotos
+package seiry.xposed.pixelifygooglephotos.lsposed
 
 import android.app.Activity
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import balti.xposed.pixelifygooglephotos.Constants.PREF_DEVICE_TO_SPOOF
-import balti.xposed.pixelifygooglephotos.Constants.PREF_ENABLE_VERBOSE_LOGS
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
-import balti.xposed.pixelifygooglephotos.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_DEVICE_TO_SPOOF
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_ENABLE_VERBOSE_LOGS
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_ANDROID_VERSION_FOLLOW_DEVICE
+import seiry.xposed.pixelifygooglephotos.lsposed.Constants.PREF_SPOOF_ANDROID_VERSION_MANUAL
 
 class AdvancedOptionsActivity: AppCompatActivity(R.layout.advanced_options_activity) {
 
