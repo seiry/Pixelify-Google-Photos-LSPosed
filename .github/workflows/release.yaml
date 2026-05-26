@@ -39,7 +39,7 @@ jobs:
         keyStorePassword: ${{ secrets.KEY }}
         keyPassword: ${{ secrets.KEY }}
       env:
-        BUILD_TOOLS_VERSION: "36.0.0"
+        BUILD_TOOLS_VERSION: "36.1.0"
 
     - name: Retrieve version
       run: |
