@@ -2,6 +2,8 @@
 
 [![Build and Release](https://github.com/seiry/Pixelify-Google-Photos/actions/workflows/release.yaml/badge.svg)](https://github.com/seiry/Pixelify-Google-Photos/actions/workflows/release.yaml)
 
+🇨🇳 **中文版**: [README.zh-CN.md](README.zh-CN.md)
+
 This is a fork of [BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos), migrated from the legacy `de.robv.android.xposed` API to the modern [libxposed/api](https://github.com/libxposed/api) (LSPosed API 101).
 
 The module makes any Android device look like a Google Pixel to the Google Photos app so it unlocks Pixel-exclusive features (unlimited original-quality backup, Magic Eraser, etc.).
@@ -18,12 +20,18 @@ The module makes any Android device look like a Google Pixel to the Google Photo
 ## Requirements
 
 - Android **8.0+** (libxposed/api 101 requires minSdk 26; the previous fork supported 5.0+)
-- **LSPosed only** — EdXposed is no longer supported because it does not implement libxposed/api 101. Upstream's EdXposed compatibility was dropped together with the legacy API.
+- **[LSPosed](https://github.com/LSPosed/LSPosed) 2.0+** — earlier LSPosed releases ship the legacy API only and won't load this module. EdXposed is no longer supported either (libxposed/api 101 is LSPosed-only)
 - Magisk / KernelSU (or any other Zygisk host that LSPosed can ride on)
+
+Useful LSPosed links:
+
+- [LSPosed Telegram group](https://t.me/LSPosed)
+- [libxposed/api Javadoc](https://libxposed.github.io/api/) — the API used inside the hooked process (`ModuleMain`)
+- [libxposed/service Javadoc](https://libxposed.github.io/service/) — the API used in the UI app for remote preferences, scope queries, etc.
 
 ## Install
 
-1. Install Magisk + [LSPosed (Zygisk)](https://github.com/LSPosed/LSPosed).
+1. Install Magisk + [LSPosed (Zygisk) 2.0 or newer](https://github.com/LSPosed/LSPosed).
 2. Install the APK from the [Releases](https://github.com/seiry/Pixelify-Google-Photos/releases) page.
 3. Open LSPosed, enable the module — scope is automatically `com.google.android.apps.photos` because the module declares `staticScope=true` in `META-INF/xposed/module.prop` and lists Google Photos in `META-INF/xposed/scope.list`.
 4. Force-stop or restart Google Photos (the launcher app provides a button for this). You may also need to clear Google Photos data the first time.
@@ -53,6 +61,8 @@ export ANDROID_HOME=/path/to/Android/sdk
 ./gradlew assembleRelease    # unsigned release APK; sign with apksigner or via the workflow
 ```
 
+For release workflow and version bumping, see [RELEASING.md](RELEASING.md).
+
 ## Disclaimer
 
 The user takes sole responsibility for any damage that might arise from using this module, including device damage, data loss, and legal matters. This project was made as a learning initiative and the developer cannot be held liable for use of it.
@@ -60,4 +70,4 @@ The user takes sole responsibility for any damage that might arise from using th
 ## Credits
 
 - Upstream: [BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos)
-- Modern Xposed API: [libxposed/api](https://github.com/libxposed/api), [LSPosed](https://github.com/LSPosed/LSPosed)
+- Modern Xposed API: [libxposed/api](https://github.com/libxposed/api), [libxposed/service](https://github.com/libxposed/service), [LSPosed](https://github.com/LSPosed/LSPosed)
