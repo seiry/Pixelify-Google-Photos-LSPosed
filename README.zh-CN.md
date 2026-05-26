@@ -23,7 +23,7 @@
 - **LSPosed 2.0 或更高** —— 更早的 LSPosed 只提供老 API，加载不了这个模块。EdXposed 同样不再支持（libxposed/api 101 只在 LSPosed 上跑）
 - Magisk / KernelSU（或其他能承载 LSPosed 的 Zygisk 宿主）
 
-> **关于 LSPosed 的说明。** 原版 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已于 2024-01 **被 archived**，最后 commit `df74d83`，不再发版。当前的 LSPosed 2.0+ 都来自社区 fork —— 自己挑一个信得过的、活跃维护的版本安装。
+> **关于 LSPosed 的说明。** 原版 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已于 2024-01 **被 archived**（最后 commit `df74d83`），不再发版。LSPosed 2.0+ 目前**只通过 [LSPosed Telegram 群](https://t.me/LSPosed)以闭源构建产物的形式分发** —— 没有公开源码、没有 GitHub release。是否使用请自行权衡。
 
 目前**只在 Android 16 + LSPosed 2** 上验证过。理论上 Android 8 及以上（minSdk 是 26）都应该能跑，但没实际测过。
 
@@ -35,7 +35,7 @@
 
 ## 安装步骤
 
-1. 装 Magisk + LSPosed 2.0 或更新版（原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 已 archived，请从社区维护的 fork 获取构建产物）
+1. 装 Magisk + LSPosed 2.0 或更新版。2.0+ 的构建产物目前只在 [LSPosed Telegram 群](https://t.me/LSPosed)中分发（闭源）；GitHub 上的 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed) 仓库已 archived，里面只剩老版 1.x 的源码
 2. 从 [Releases](https://github.com/seiry/Pixelify-Google-Photos/releases) 页面下载 APK 并安装
 3. 打开 LSPosed，启用本模块 —— 作用域已通过 `META-INF/xposed/module.prop` 的 `staticScope=true` 和 `META-INF/xposed/scope.list` 自动锁定为 `com.google.android.apps.photos`
 4. 强制停止或重启 Google Photos（启动器 app 里有按钮）。首次使用可能需要清除 Google Photos 数据
@@ -75,4 +75,4 @@ export ANDROID_HOME=/path/to/Android/sdk
 
 - 上游：[BaltiApps/Pixelify-Google-Photos](https://github.com/BaltiApps/Pixelify-Google-Photos)
 - 现代 Xposed API：[libxposed/api](https://github.com/libxposed/api)、[libxposed/service](https://github.com/libxposed/service)
-- LSPosed 框架：原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed)（已 archived，由社区 fork 接力）
+- LSPosed 框架：原 [LSPosed/LSPosed](https://github.com/LSPosed/LSPosed)（已 archived；2.0+ 构建只在 [LSPosed Telegram 群](https://t.me/LSPosed) 中分发）
